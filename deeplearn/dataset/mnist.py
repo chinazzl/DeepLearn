@@ -18,7 +18,7 @@ key_file = {
 }
 
 dataset_dir = os.path.dirname(os.path.abspath(__file__))
-save_file = dataset_dir + "/dataset.pkl"
+save_file = dataset_dir + "/mnist.pkl"
 
 train_num = 60000
 test_num = 10000
@@ -112,7 +112,12 @@ def load_mnist(normalize=True, flatten=True, one_hot_label=False):
 
     with open(save_file, 'rb') as f:
         dataset = pickle.load(f)
-
+    '''
+        预处理在神经网络（深度学习）中非常实用，其有效性已在提高识别性能和学习的效率等众多实验中得到证明。
+        在刚才的例子中，作为一种预处理，我们将各个像素值除以 255，进行了简单的正规化。实际上，很多预处理都会考虑到数据的整体分布。
+        比如，利用数据整体的均值或标准差，移动数据，使数据整体以 0 为中心分布，或者进行正规化，把数据的延展控制在一定范围内。
+        除此之外，还有将数据整体的分布形状均匀化的方法，即数据白化（whitening）等。
+    '''
     if normalize:
         for key in ('train_img', 'test_img'):
             dataset[key] = dataset[key].astype(np.float32)

@@ -51,13 +51,33 @@ def softmax(a):
 
 
 if __name__ == '__main__':
-    x,t = get_data()
+    # x,t = get_data()
+    # network = init_network()
+    # accuracy_cnt = 0
+    # for i in range(len(x)):
+    #     y = predict(network, x[i])
+    #     # 将获取被赋给参数 x 的数组中的最大值元素的索引
+    #     p = np.argmax(y)
+    #     if p == t[i]:
+    #         accuracy_cnt += 1
+    # print("Accuracy: ", str(float(accuracy_cnt / len(x))))
+    '''
+        批处理
+        x,t = get_data()
+        batch_size = 100
+        for i in range(0, len(x), batch_size):
+            x_batch = x[i: batch_size]
+            y_batch = predict(network, x_batch)
+            p = np.argmax(y_batch, axis=1)
+            accuracy += np.sum(p == t[i: i+batch_size])
+    '''
+    # =========================输出神经网络的各层权重情况========================================
+    x, _ = get_data()
     network = init_network()
-    accuracy_cnt = 0
-    for i in range(len(x)):
-        y = predict(network, x[i])
-        # 获取概率最高的元素的索引
-        p = np.argmax(y)
-        if p == t[i]:
-            accuracy_cnt += 1
-    print("Accuracy: ", str(float(accuracy_cnt / len(x))))
+    W1, W2, W3 = network['W1'], network['W2'], network['W3']
+    print("x shape: " + str(x.shape))
+    print("x[0] shape: " + str(x.shape))
+    print("W1 shape: " + str(W1.shape))
+    print("W2 shape: " + str(W2.shape))
+    print("W3 shape: " + str(W3.shape))
+
